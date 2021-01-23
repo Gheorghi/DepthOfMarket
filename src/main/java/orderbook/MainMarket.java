@@ -9,18 +9,16 @@ public class MainMarket {
         Asks asks = new Asks(dataSet.getMap("asks"));
         Bids bids = new Bids(dataSet.getMap("bids"));
         OrderBook book = new OrderBook(asks, bids);
-        book.setOrder(60.3,24,"A");
-        book.setOrder(111.0,23,"A");
-
+        book.fillTheBookFromConsole();
 
         try {
-            System.out.println(new MarketDataReport().getMarkerShapshot(asks,bids));
+            System.out.println(new MarketDataReport().getMarkerShapshot(asks, bids));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
         for (Order order : book.getDepthOfMarket()) {
-            System.out.println(order.getPrice().toString()+':'+order.getVolume());
+            System.out.println(order.getPrice().toString() + ':' + order.getVolume());
         }
     }
 }
