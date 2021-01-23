@@ -2,7 +2,7 @@ package orderbook;
 
 import java.util.Comparator;
 
-class OrderCompare implements Comparator<Order>
+class OrderCompareDesc implements Comparator<Order>
 {
     public int compare(Order one, Order two)
     {

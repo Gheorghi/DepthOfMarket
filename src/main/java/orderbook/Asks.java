@@ -2,10 +2,7 @@ package orderbook;
 
 import orderbook.interfaces.SortableInterface;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Asks extends Orders implements SortableInterface {
 
@@ -24,6 +21,6 @@ public class Asks extends Orders implements SortableInterface {
 
     @Override
     public void sort() {
-        this.orders.sort(Comparator.comparingDouble(Order::getPrice));
+        this.orders.sort(Collections.reverseOrder(new OrderCompareDesc()));
     }
 }

@@ -11,16 +11,16 @@ public abstract class Order implements OrderInterface {
     private UUID id;
 
     public Order(Double price, int volume, UUID id) {
-        this.price = price;
-        this.volume = volume;
-        this.id = id;
+        this.setPrice(price);
+        this.setVolume(volume);
+        this.setId(id);
     }
 
     protected UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    protected void setId(UUID id) {
         this.id = id;
     }
 
@@ -38,5 +38,9 @@ public abstract class Order implements OrderInterface {
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    public UUID getUUID(){
+        return this.getId();
     }
 }

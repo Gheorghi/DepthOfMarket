@@ -24,6 +24,6 @@ public class Bids extends Orders implements SortableInterface {
 
     @Override
     public void sort() {
-        this.orders.sort(Comparator.comparingDouble(Order::getPrice).reversed());
+        this.orders.sort(Comparator.comparingDouble(Order::getPrice));
     }
 }
