@@ -17,8 +17,8 @@ public class MarketDataReport implements ReportInterface {
         Map<String, ArrayList> bidsList = new HashMap<>();
         asks.sort();
         bids.sort();
-        asksList.put("asks", asks.orders);
-        bidsList.put("bids", bids.orders);
+        asksList.put("asks", asks.getOrders());
+        bidsList.put("bids", bids.getOrders());
         String json = ow.writeValueAsString(asksList) +  ow.writeValueAsString(bidsList);
         return json;
     }

@@ -8,7 +8,7 @@ public class Asks extends Orders implements SortableInterface {
 
     public Asks(ArrayList<Map<String, String>> orders) {
         for (Map<String, String> order : orders) {
-            this.orders.add(
+            this.addOrder(
                     new Ask(
                             Double.parseDouble(order.get("price")),
                             Integer.parseInt(order.get("volume")),
@@ -21,6 +21,6 @@ public class Asks extends Orders implements SortableInterface {
 
     @Override
     public void sort() {
-        this.orders.sort(Collections.reverseOrder(new OrderCompareDesc()));
+        this.getOrders().sort(Collections.reverseOrder(new OrderCompareDesc()));
     }
 }

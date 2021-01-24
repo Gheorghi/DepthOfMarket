@@ -9,12 +9,8 @@ public class OrderBook implements BookInterface {
     ArrayList<Order> bids;
 
     public OrderBook(Orders asks, Orders bids) {
-        this.asks = asks.orders;
-        this.bids = bids.orders;
-
-        this.asks.sort(Comparator.comparingDouble(Order::getPrice));
-        Collections.sort(this.asks, Collections.reverseOrder(new OrderCompareDesc()));
-        this.bids.sort(Comparator.comparingDouble(Order::getPrice));
+        this.asks = asks.getOrders();
+        this.bids = bids.getOrders();
     }
 
     @Override
@@ -51,8 +47,7 @@ public class OrderBook implements BookInterface {
 
     private ArrayList<Order> mergeOrders() {
         ArrayList<Order> depthOfMarket = new ArrayList<Order>();
-        this.asks.sort(Comparator.comparingDouble(Order::getPrice));
-        Collections.sort(this.asks, Collections.reverseOrder(new OrderCompareDesc()));
+        this.asks.sort(Collections.reverseOrder(new OrderCompareDesc()));
         this.bids.sort(Comparator.comparingDouble(Order::getPrice));
 
         depthOfMarket.addAll(this.asks);

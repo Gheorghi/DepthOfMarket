@@ -11,7 +11,7 @@ public class Bids extends Orders implements SortableInterface {
 
     public Bids(ArrayList<Map<String, String>> orders) {
         for (Map<String, String> order : orders) {
-            this.orders.add(
+            this.addOrder(
                     new Bid(
                             Double.parseDouble(order.get("price")),
                             Integer.parseInt(order.get("volume")),
@@ -24,6 +24,6 @@ public class Bids extends Orders implements SortableInterface {
 
     @Override
     public void sort() {
-        this.orders.sort(Comparator.comparingDouble(Order::getPrice));
+        this.getOrders().sort(Comparator.comparingDouble(Order::getPrice));
     }
 }

@@ -2,14 +2,14 @@ package orderbook;
 
 import java.util.ArrayList;
 
-public class Orders {
+public abstract class Orders {
+    private ArrayList<Order> orders = new ArrayList<>();
 
-    public ArrayList<Order> orders =new ArrayList<>();
-
-    public Orders(ArrayList<Order> orders) {
-        this.orders = orders;
+    public ArrayList<Order> getOrders() {
+        return orders;
     }
 
-    public Orders() {
+    public void addOrder(Order order) {
+        this.orders.add(order);
     }
 }
