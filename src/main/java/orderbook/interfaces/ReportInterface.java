@@ -6,5 +6,5 @@ import orderbook.Bids;
 import orderbook.Orders;
 
 public interface ReportInterface {
-    String getMarkerShapshot(Asks asks, Bids bids) throws JsonProcessingException;
+    String getMarketShapshot(Asks asks, Bids bids) throws JsonProcessingException;
 }

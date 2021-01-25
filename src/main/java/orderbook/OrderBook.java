@@ -5,41 +5,45 @@ import orderbook.interfaces.BookInterface;
 import java.util.*;
 
 public class OrderBook implements BookInterface {
-    ArrayList<Order> asks;
-    ArrayList<Order> bids;
+    public Asks asks;
+    public Bids bids;
 
-    public OrderBook(Orders asks, Orders bids) {
-        this.asks = asks.getOrders();
-        this.bids = bids.getOrders();
+    public OrderBook(Asks asks, Bids bids) {
+        this.asks = asks;
+        this.bids = bids;
+    }
+
+    public OrderBook() {
     }
 
     @Override
     public void setOrder(Double price, int volume, String type) {
+        String message = "";
         if (type.equalsIgnoreCase("B")) {
-            this.bids.add((new Bid(price, volume, UUID.randomUUID())));
+            this.bids.getOrders().add((new Bid(price, volume, UUID.randomUUID())));
+            message = "The bid has been set";
         } else if (type.equalsIgnoreCase("A")) {
-            this.asks.add((new Ask(price, volume, UUID.randomUUID())));
+            this.asks.getOrders().add((new Ask(price, volume, UUID.randomUUID())));
+            message = "The ask has been set";
         }
+        System.out.println(message);
     }
 
     @Override
-    public List<Order> getOrderById(UUID id) {
-        List<Order> orders = new ArrayList<>();
-        for (Order order : this.getDepthOfMarket()) {
-            if (order.getId() == id) {
-                orders.add(order);
-                System.out.println("The order has been added");
-            }
-        }
-        return orders;
+    public Order getOrderById(UUID id) {
+        return this.getDepthOfMarket()
+                .stream()
+                .filter((order) -> order.getId().equals(id))
+                .reduce((prev, next) -> next)
+                .orElse(null);
     }
 
     @Override
     public void removeOrderById(UUID id) {
-        List<Order> orders = new ArrayList<>();
         for (Order order : this.getDepthOfMarket()) {
-            if (order.getId() == id) {
-                orders.remove(order);
+            if (order.getId().equals(id)) {
+                this.asks.getOrders().remove(order);
+                this.bids.getOrders().remove(order);
                 System.out.println("Order has been removed by ID: " + id);
             }
         }
@@ -47,32 +51,18 @@ public class OrderBook implements BookInterface {
 
     private ArrayList<Order> mergeOrders() {
         ArrayList<Order> depthOfMarket = new ArrayList<Order>();
-        this.asks.sort(Collections.reverseOrder(new OrderCompareDesc()));
-        this.bids.sort(Comparator.comparingDouble(Order::getPrice));
+        this.asks.getOrders().sort(Collections.reverseOrder(new OrderCompareDesc()));
+        this.bids.getOrders().sort(Comparator.comparingDouble(Order::getPrice));
 
-        depthOfMarket.addAll(this.asks);
-        depthOfMarket.addAll(this.bids);
+        depthOfMarket.addAll(this.asks.getOrders());
+        depthOfMarket.addAll(this.bids.getOrders());
         return depthOfMarket;
     }
+
 
     public ArrayList<Order> getDepthOfMarket() {
         return mergeOrders();
     }
 
-    public void fillTheBookFromConsole() {
-        System.out.println("Would you like to enter a new Order? (Yes/No)");
-        String desitionString = new Scanner(System.in).next();
-        while (desitionString.equalsIgnoreCase("yes")) {
-            System.out.println("Enter an order details like: price, volume, type(A for asks || B for bids");
-            Scanner keyboard = new Scanner(System.in);
-            Double price = keyboard.nextDouble();
-            int volume = keyboard.nextInt();
-            String type = keyboard.next();
-            System.out.println("Entered-: Price: " + price + ", volume: " + volume + ", type: " + type);
-            this.setOrder(price, volume, type);
-            System.out.println("Would you like to enter more Order? (Yes/No)");
-            desitionString = new Scanner(System.in).next();
-        }
-    }
 }
 

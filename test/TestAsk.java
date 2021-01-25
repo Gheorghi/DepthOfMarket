@@ -1,4 +1,3 @@
-package test;
 
 import orderbook.Ask;
 import orderbook.Order;
@@ -16,7 +15,7 @@ public class TestAsk {
         assertAll("Ask",
                 () -> assertEquals(33.33, ask.getPrice()),
                 () -> assertEquals(3, ask.getVolume()),
-                () -> assertEquals(id, ask.getUUID()),
+                () -> assertEquals(id, ask.getId()),
                 () -> assertTrue(ask instanceof Order)
         );
     }
@@ -30,7 +29,7 @@ public class TestAsk {
         assertAll("Ask",
                 () -> assertEquals(55.0, ask.getPrice()),
                 () -> assertEquals(5, ask.getVolume()),
-                () -> assertEquals(id, ask.getUUID()),
+                () -> assertEquals(id, ask.getId()),
                 () -> assertTrue(ask instanceof Order)
         );
     }

@@ -1,9 +1,12 @@
 package orderbook;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import orderbook.interfaces.OrderInterface;
+import orderbook.interfaces.Presenter;
 
 import java.util.UUID;
 
+@JsonFilter("uuidFilter")
 public abstract class Order implements OrderInterface {
 
     private Double price;
@@ -16,7 +19,7 @@ public abstract class Order implements OrderInterface {
         this.setId(id);
     }
 
-    protected UUID getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -40,7 +43,7 @@ public abstract class Order implements OrderInterface {
         this.volume = volume;
     }
 
-    public UUID getUUID(){
-        return this.getId();
+    public void showDetails(Presenter presenter){
+        presenter.display(this);
     }
 }

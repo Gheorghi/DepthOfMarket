@@ -1,4 +1,3 @@
-package test;
 
 import orderbook.Bid;
 import orderbook.Order;
@@ -17,7 +16,7 @@ public class TestBid {
         assertAll("Bid",
                 () -> assertEquals(11.23, bid.getPrice()),
                 () -> assertEquals(2, bid.getVolume()),
-                () -> assertEquals(id, bid.getUUID()),
+                () -> assertEquals(id, bid.getId()),
                 () -> assertTrue(bid instanceof Order)
         );
     }
@@ -31,7 +30,7 @@ public class TestBid {
         assertAll("Bid",
                 () -> assertEquals(57.0, bid.getPrice()),
                 () -> assertEquals(9, bid.getVolume()),
-                () -> assertEquals(id, bid.getUUID()),
+                () -> assertEquals(id, bid.getId()),
                 () -> assertTrue(bid instanceof Order)
         );
     }
