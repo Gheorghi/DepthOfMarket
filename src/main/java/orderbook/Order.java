@@ -6,6 +6,10 @@ import orderbook.interfaces.Presenter;
 
 import java.util.UUID;
 
+/**
+ * Abstract class which implements the Order details and provides the methods to interact with them
+ * @author Gheorghi
+ */
 @JsonFilter("uuidFilter")
 public abstract class Order implements OrderInterface {
 

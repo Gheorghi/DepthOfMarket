@@ -5,14 +5,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * ConsoleApp is a class that provides to the USER to interact with the program through console
+ *
+ * @author Gheorghi
+ */
 public class ConsoleApp {
     OrderBook orderBook;
     ConsoleOrderPresenter presenter = new ConsoleOrderPresenter();
 
+    /**
+     * Provides an OrderBook object to the ConsoleApp object to operate with
+     */
     public ConsoleApp(OrderBook orderBook) {
         this.orderBook = orderBook;
     }
 
+    /**
+     * Method menu() shows the options that are available for the USER
+     */
     private void menu() {
         System.out.println("\n");
         System.out.println("************************");
@@ -26,11 +37,19 @@ public class ConsoleApp {
         System.out.println("6. Quit");
     }
 
+    /**
+     * The inputReader() reads the keyboard input values
+     * @return String
+     */
     private String inputReader() {
         Scanner keyboard = new Scanner(System.in);
         return keyboard.next();
     }
 
+    /**
+     * The askForInput() method asks from the user the input values for a proper purposes
+     * @return String
+     */
     private String askForInput(String question) {
         String input = "";
 
@@ -42,6 +61,12 @@ public class ConsoleApp {
         return input;
     }
 
+    /**
+     * The method run() is using for providing/retrieving/viewing the data from/to application
+     * provides a user friendly interaction
+     *
+     * @throws JsonProcessingException that comes from getMarketShapshot()
+     */
     public void run() throws JsonProcessingException {
         String selection = "";
         while (!selection.equalsIgnoreCase("6")) {
@@ -100,6 +125,9 @@ public class ConsoleApp {
         }
     }
 
+    /**
+     * The displayTheMarket() method is displaying the markets actual elements
+     */
     private void displayTheMarket() {
         this.presenter.display(this.orderBook.getDepthOfMarket());
     }

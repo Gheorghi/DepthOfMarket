@@ -2,6 +2,10 @@ package orderbook;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+/**
+ * The MainMarket class which provides the required main() method
+ * to start a Java app
+ */
 public class MainMarket {
 
     public static void main(String[] args) throws JsonProcessingException {

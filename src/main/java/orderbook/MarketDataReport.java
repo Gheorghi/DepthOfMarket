@@ -11,7 +11,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class MarketDataReport provides a JSON report of market values
+ */
 public class MarketDataReport implements ReportInterface {
+
+    /**
+     * Method getMarketShapshot(..) combines together the provided parameters of Asks and Bids,
+     * filters out the ID
+     * @return String
+     */
     @Override
     public String getMarketShapshot(Asks asks, Bids bids) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

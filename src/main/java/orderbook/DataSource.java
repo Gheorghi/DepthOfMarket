@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The class that is using as a data source class for initial values
+ */
 public class DataSource {
 
     public String[][] bids = {
@@ -26,6 +29,10 @@ public class DataSource {
             {"53.5", "43"}
     };
 
+    /**
+     * Method getMap(..) converts the array of orders to the ArrayList of Maps
+     * @return ArrayList<Map<String, String>>
+     */
     public ArrayList<Map<String, String>> getMap(String type){
         ArrayList<Map<String, String>> ordersList = new ArrayList<>();
         String[][] orders;

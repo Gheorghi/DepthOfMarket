@@ -4,6 +4,16 @@ import orderbook.interfaces.BookInterface;
 
 import java.util.*;
 
+/**
+ * Class OrderBook implements the behavior of BookInterface
+ * Initializes Asks and Bids objects
+ * Implements methods to set / get / remove orders from OrderBook
+ * Provides:
+ *      method getDepthOfMarket() to merge Asks and Bids orders
+ *      method mergeOrders() to display the markets actual elements
+ * @author Gheorghi
+ */
+
 public class OrderBook implements BookInterface {
     public Asks asks;
     public Bids bids;
@@ -16,6 +26,12 @@ public class OrderBook implements BookInterface {
     public OrderBook() {
     }
 
+    /**
+     * Method setOrder(..) to set a new Order
+     * @param price price of new order
+     * @param type type of new order
+     * @param volume volume of new order
+     */
     @Override
     public void setOrder(Double price, int volume, String type) {
         String message = "";
@@ -29,6 +45,10 @@ public class OrderBook implements BookInterface {
         System.out.println(message);
     }
 
+    /**
+     * Method getOrderById(..) to remove the Order by ID
+     * @param id id of Order to get
+     */
     @Override
     public Order getOrderById(UUID id) {
         return this.getDepthOfMarket()
@@ -38,6 +58,10 @@ public class OrderBook implements BookInterface {
                 .orElse(null);
     }
 
+    /**
+     * Method removeOrderById(..) to remove the Order by ID
+     * @param id id of Order to remove
+     */
     @Override
     public void removeOrderById(UUID id) {
         for (Order order : this.getDepthOfMarket()) {
@@ -49,6 +73,10 @@ public class OrderBook implements BookInterface {
         }
     }
 
+    /**
+     * Merges all orders and
+     * @return ArrayList<Order> list of merged orders
+     */
     private ArrayList<Order> mergeOrders() {
         ArrayList<Order> depthOfMarket = new ArrayList<Order>();
         this.asks.getOrders().sort(Collections.reverseOrder(new OrderCompareDesc()));
@@ -59,7 +87,10 @@ public class OrderBook implements BookInterface {
         return depthOfMarket;
     }
 
-
+    /**
+     * Wrapper method to interact with private mergeOrders() method
+     * @return  Merged ArrayList<Order> of Orders
+     */
     public ArrayList<Order> getDepthOfMarket() {
         return mergeOrders();
     }
